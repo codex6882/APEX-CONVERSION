@@ -35,8 +35,6 @@ const DashboardHome = () => {
         <h1 className="text-2xl font-heading font-bold text-navy-900 mt-1">Hello {profile.username} 👋</h1>
         <div className="mt-3"><KycBadge status={profile.kyc_status}/></div>
       </div>
-
-      {/* Balance Card */}
       <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between mb-1">
           <p className="text-gray-400 text-sm font-body">Account Balance</p>
@@ -57,48 +55,35 @@ const DashboardHome = () => {
           </Link>
         </div>
       </div>
-
-      {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <p className="text-gray-400 text-xs font-body">Total Profit</p>
-            <div className="w-8 h-8 bg-green-50 rounded-xl flex items-center justify-center">
-              <DollarSign size={15} className="text-green-500"/>
-            </div>
+            <div className="w-8 h-8 bg-green-50 rounded-xl flex items-center justify-center"><DollarSign size={15} className="text-green-500"/></div>
           </div>
           <p className="text-2xl font-heading font-bold text-navy-900">${Number(profile.balance).toFixed(2)}</p>
-          <p className="text-green-500 text-xs font-body mt-1">+0.0% from last period</p>
+          <p className="text-green-500 text-xs font-body mt-1">All time</p>
         </div>
-
         <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <p className="text-gray-400 text-xs font-body">Welcome Bonus</p>
-            <div className="w-8 h-8 bg-orange-50 rounded-xl flex items-center justify-center">
-              <Gift size={15} className="text-orange-400"/>
-            </div>
+            <div className="w-8 h-8 bg-orange-50 rounded-xl flex items-center justify-center"><Gift size={15} className="text-orange-400"/></div>
           </div>
           <p className="text-2xl font-heading font-bold text-navy-900">${Number(profile.bonus).toFixed(2)}</p>
           <p className="text-orange-400 text-xs font-body mt-1">Welcome Bonus</p>
         </div>
-
         <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <p className="text-gray-400 text-xs font-body">Total Deposit</p>
-            <div className="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center">
-              <ArrowDownLeft size={15} className="text-blue-500"/>
-            </div>
+            <div className="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowDownLeft size={15} className="text-blue-500"/></div>
           </div>
           <p className="text-2xl font-heading font-bold text-navy-900">$0.00</p>
           <p className="text-gray-400 text-xs font-body mt-1">All time</p>
         </div>
-
         <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <p className="text-gray-400 text-xs font-body">Total Withdrawal</p>
-            <div className="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center">
-              <ArrowUpRight size={15} className="text-blue-500"/>
-            </div>
+            <div className="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowUpRight size={15} className="text-blue-500"/></div>
           </div>
           <p className="text-2xl font-heading font-bold text-navy-900">$0.00</p>
           <p className="text-gray-400 text-xs font-body mt-1">All time</p>
@@ -116,9 +101,7 @@ const DepositPage = () => {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
   const [amount, setAmount] = useState('')
-
   const copyAddress = () => { navigator.clipboard.writeText(BTC_ADDRESS); setCopied(true); setTimeout(()=>setCopied(false),2000) }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setError('')
     if (!amount || !proofFile) { setError('Please enter amount and upload proof.'); return }
@@ -133,11 +116,10 @@ const DepositPage = () => {
     } catch { setError('Failed to submit. Please try again.') }
     finally { setLoading(false) }
   }
-
   return (
     <div className="space-y-6 max-w-lg">
       <h2 className="text-2xl font-heading font-bold text-navy-900">Make a Deposit</h2>
-      {success && <div className="bg-green-50 border border-green-200 text-green-700 rounded-xl p-4 text-sm font-body">✅ Deposit submitted! Admin will confirm and update your balance shortly.</div>}
+      {success && <div className="bg-green-50 border border-green-200 text-green-700 rounded-xl p-4 text-sm font-body">✅ Deposit submitted! Admin will confirm shortly.</div>}
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm font-body">{error}</div>}
       <div className="bg-navy-900 rounded-2xl p-6 text-white">
         <p className="text-white/60 text-xs font-body uppercase tracking-widest mb-3">Wallet Address</p>
@@ -152,8 +134,7 @@ const DepositPage = () => {
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
         <div>
           <label className="text-gray-700 text-sm font-body font-semibold block mb-1">Amount Sent ($)</label>
-          <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="Enter amount"
-            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-blue-500"/>
+          <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="Enter amount" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-blue-500"/>
         </div>
         <div>
           <label className="text-gray-700 text-sm font-body font-semibold block mb-1">Upload Payment Proof</label>
@@ -171,47 +152,57 @@ const DepositPage = () => {
   )
 }
 
-const ActionsPage = () => {
-  return (
-    <div className="space-y-4 max-w-lg">
-      <h2 className="text-2xl font-heading font-bold text-navy-900">Actions</h2>
-      <div className="grid grid-cols-1 gap-4">
-        <Link to="/dashboard/deposit" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors card-hover">
-          <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowDownLeft size={22} className="text-blue-600"/></div>
-          <div><p className="font-heading font-bold text-navy-900">Make a Deposit</p><p className="text-gray-400 text-sm font-body">Fund your account</p></div>
-        </Link>
-        <Link to="/dashboard/withdraw" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors card-hover">
-          <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowUpRight size={22} className="text-blue-600"/></div>
-          <div><p className="font-heading font-bold text-navy-900">Request Withdrawal</p><p className="text-gray-400 text-sm font-body">Withdraw your earnings</p></div>
-        </Link>
-        <Link to="/dashboard/kyc" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors card-hover">
-          <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><Shield size={22} className="text-blue-600"/></div>
-          <div><p className="font-heading font-bold text-navy-900">KYC Verification</p><p className="text-gray-400 text-sm font-body">Verify your identity</p></div>
-        </Link>
-      </div>
+const ActionsPage = () => (
+  <div className="space-y-4 max-w-lg">
+    <h2 className="text-2xl font-heading font-bold text-navy-900">Actions</h2>
+    <div className="grid grid-cols-1 gap-4">
+      <Link to="/dashboard/deposit" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors">
+        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowDownLeft size={22} className="text-blue-600"/></div>
+        <div><p className="font-heading font-bold text-navy-900">Make a Deposit</p><p className="text-gray-400 text-sm font-body">Fund your account</p></div>
+      </Link>
+      <Link to="/dashboard/withdraw" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors">
+        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><ArrowUpRight size={22} className="text-blue-600"/></div>
+        <div><p className="font-heading font-bold text-navy-900">Request Withdrawal</p><p className="text-gray-400 text-sm font-body">Withdraw your earnings</p></div>
+      </Link>
+      <Link to="/dashboard/kyc" className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4 hover:border-blue-200 transition-colors">
+        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center"><Shield size={22} className="text-blue-600"/></div>
+        <div><p className="font-heading font-bold text-navy-900">KYC Verification</p><p className="text-gray-400 text-sm font-body">Verify your identity</p></div>
+      </Link>
     </div>
-  )
-}
+  </div>
+)
 
 const WithdrawPage = () => {
   const { profile, refreshProfile, user } = useAuth()
-  const [form, setForm] = useState({ amount:'', btcAddress:'', swiftCode:'' })
+  const [paymentType, setPaymentType] = useState<'btc' | 'usdt' | ''>('')
+  const [amount, setAmount] = useState('')
+  const [walletAddress, setWalletAddress] = useState('')
+  const [usdtNetwork, setUsdtNetwork] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setError('')
-    if (!form.amount || !form.btcAddress || !form.swiftCode) { setError('Please fill all fields.'); return }
-    const amount = parseFloat(form.amount)
-    if (isNaN(amount)||amount<=0) { setError('Enter a valid amount.'); return }
-    if (profile && amount > profile.balance) { setError('Insufficient balance.'); return }
-    if (form.swiftCode.length < 4) { setError('Invalid Swift Code.'); return }
+    if (!amount || parseFloat(amount) <= 0) { setError('Please enter a valid amount.'); return }
+    if (profile && parseFloat(amount) > profile.balance) { setError('Insufficient balance.'); return }
+    if (!paymentType) { setError('Please select a crypto type.'); return }
+    if (!walletAddress.trim()) { setError('Please enter your wallet address.'); return }
+    if (paymentType === 'usdt' && !usdtNetwork) { setError('Please select USDT network.'); return }
     setLoading(true)
-    const { error: err } = await supabase.from('withdrawals').insert({ user_id: user?.id, amount, btc_address: form.btcAddress, swift_code: form.swiftCode, status: 'pending' })
+    const { error: err } = await supabase.from('withdrawals').insert({
+      user_id: user?.id,
+      amount: parseFloat(amount),
+      payment_method: paymentType === 'btc' ? 'BTC' : `USDT (${usdtNetwork})`,
+      wallet_type: paymentType === 'btc' ? 'BTC' : `USDT (${usdtNetwork})`,
+      wallet_address: walletAddress,
+      status: 'pending'
+    })
     setLoading(false)
     if (err) { setError('Failed. Please try again.'); return }
-    setSuccess(true); setForm({ amount:'', btcAddress:'', swiftCode:'' }); refreshProfile()
+    setSuccess(true)
+    setAmount(''); setPaymentType(''); setWalletAddress(''); setUsdtNetwork('')
+    refreshProfile()
   }
 
   return (
@@ -224,13 +215,44 @@ const WithdrawPage = () => {
       {success && <div className="bg-green-50 border border-green-200 text-green-700 rounded-xl p-4 text-sm font-body">✅ Withdrawal request submitted! Admin will review shortly.</div>}
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm font-body">{error}</div>}
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
-        {[{label:'Amount ($)',key:'amount',type:'number',ph:'Enter withdrawal amount'},{label:'Wallet Address',key:'btcAddress',type:'text',ph:'Enter your wallet address'},{label:'Swift Code',key:'swiftCode',type:'text',ph:'Enter Swift Code'}].map(({label,key,type,ph})=>(
-          <div key={key}>
-            <label className="text-gray-700 text-sm font-body font-semibold block mb-1">{label}</label>
-            <input type={type} value={form[key as keyof typeof form]} onChange={e=>setForm(p=>({...p,[key]:e.target.value}))} placeholder={ph}
+        <div>
+          <label className="text-gray-700 text-sm font-body font-semibold block mb-1">Amount ($)</label>
+          <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="Enter withdrawal amount" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-blue-500"/>
+        </div>
+        <div>
+          <label className="text-gray-700 text-sm font-body font-semibold block mb-2">Select Crypto</label>
+          <div className="grid grid-cols-2 gap-3">
+            <button type="button" onClick={()=>{ setPaymentType('btc'); setUsdtNetwork('') }}
+              className={`py-3 rounded-xl text-sm font-body font-semibold border-2 transition-colors ${paymentType==='btc'?'border-blue-600 bg-blue-50 text-blue-600':'border-gray-200 text-gray-500'}`}>
+              ₿ Bitcoin (BTC)
+            </button>
+            <button type="button" onClick={()=>setPaymentType('usdt')}
+              className={`py-3 rounded-xl text-sm font-body font-semibold border-2 transition-colors ${paymentType==='usdt'?'border-blue-600 bg-blue-50 text-blue-600':'border-gray-200 text-gray-500'}`}>
+              ₮ Tether (USDT)
+            </button>
+          </div>
+        </div>
+        {paymentType === 'usdt' && (
+          <div>
+            <label className="text-gray-700 text-sm font-body font-semibold block mb-1">Select Network</label>
+            <select value={usdtNetwork} onChange={e=>setUsdtNetwork(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-blue-500 bg-white">
+              <option value="">Choose network</option>
+              <option value="TRC20">USDT - TRC20 (Tron)</option>
+              <option value="ERC20">USDT - ERC20 (Ethereum)</option>
+              <option value="BEP20">USDT - BEP20 (BSC)</option>
+            </select>
+          </div>
+        )}
+        {paymentType && (
+          <div>
+            <label className="text-gray-700 text-sm font-body font-semibold block mb-1">
+              {paymentType === 'btc' ? 'BTC Wallet Address' : 'USDT Wallet Address'}
+            </label>
+            <input type="text" value={walletAddress} onChange={e=>setWalletAddress(e.target.value)}
+              placeholder="Enter your wallet address"
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-blue-500"/>
           </div>
-        ))}
+        )}
         <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-xl font-body font-bold text-sm transition-colors">
           {loading ? 'Submitting...' : 'Submit Request'}
         </button>
@@ -247,7 +269,6 @@ const KycPage = () => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
-
   if (profile?.kyc_status==='pending') return (
     <div className="max-w-lg space-y-6">
       <h2 className="text-2xl font-heading font-bold text-navy-900">KYC Verification</h2>
@@ -256,7 +277,6 @@ const KycPage = () => {
       </div>
     </div>
   )
-
   if (profile?.kyc_status==='verified') return (
     <div className="max-w-lg space-y-6">
       <h2 className="text-2xl font-heading font-bold text-navy-900">KYC Verification</h2>
@@ -265,7 +285,6 @@ const KycPage = () => {
       </div>
     </div>
   )
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setError('')
     if (!docType||!frontFile||!backFile) { setError('Please select document type and upload both sides.'); return }
@@ -280,14 +299,13 @@ const KycPage = () => {
     } catch { setError('Upload failed. Please try again.') }
     finally { setLoading(false) }
   }
-
   return (
     <div className="max-w-lg space-y-6">
       <h2 className="text-2xl font-heading font-bold text-navy-900">KYC Verification</h2>
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm font-body">{error}</div>}
       {success ? (
         <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
-          <p className="text-green-800 font-body leading-relaxed">Your KYC documents have been successfully submitted. Our compliance team will verify your identity within 24-48 hours.</p>
+          <p className="text-green-800 font-body leading-relaxed">Documents submitted. Our team will verify within 24-48 hours.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
@@ -330,17 +348,14 @@ const HistoryPage = () => {
   const [tab, setTab] = useState<'deposits'|'withdrawals'>('deposits')
   const [deposits, setDeposits] = useState<any[]>([])
   const [withdrawals, setWithdrawals] = useState<any[]>([])
-
   useEffect(() => {
     if (user) {
       supabase.from('deposits').select('*').eq('user_id',user.id).order('created_at',{ascending:false}).then(({data})=>{ if(data) setDeposits(data) })
       supabase.from('withdrawals').select('*').eq('user_id',user.id).order('created_at',{ascending:false}).then(({data})=>{ if(data) setWithdrawals(data) })
     }
   }, [user])
-
   const statusColors: Record<string,string> = { pending:'bg-yellow-100 text-yellow-700', approved:'bg-green-100 text-green-700', rejected:'bg-red-100 text-red-700' }
   const data = tab==='deposits' ? deposits : withdrawals
-
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-heading font-bold text-navy-900">History</h2>
@@ -376,14 +391,8 @@ const ProfilePage = () => {
       <h2 className="text-2xl font-heading font-bold text-navy-900">My Profile</h2>
       <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
         <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-heading font-bold shadow">
-            {profile.username?.[0]?.toUpperCase()}
-          </div>
-          <div>
-            <p className="font-heading font-bold text-navy-900 text-lg">{profile.full_name}</p>
-            <p className="text-gray-500 text-sm font-body">@{profile.username}</p>
-            <KycBadge status={profile.kyc_status}/>
-          </div>
+          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-heading font-bold shadow">{profile.username?.[0]?.toUpperCase()}</div>
+          <div><p className="font-heading font-bold text-navy-900 text-lg">{profile.full_name}</p><p className="text-gray-500 text-sm font-body">@{profile.username}</p><KycBadge status={profile.kyc_status}/></div>
         </div>
         {[['Username',profile.username],['Full Name',profile.full_name],['Email',profile.email],['Phone',profile.phone],['Country',profile.country],['Member Since',new Date(profile.created_at).toLocaleDateString()],['Account Balance',`$${Number(profile.balance).toFixed(2)}`],['Welcome Bonus',`$${Number(profile.bonus).toFixed(2)}`]].map(([label,value])=>(
           <div key={label} className="flex justify-between items-center py-2 border-b border-gray-50">
@@ -407,20 +416,27 @@ const Dashboard = () => {
   const { profile, signOut } = useAuth()
   const location = useLocation()
 
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = '//code.jivosite.com/widget/k2cLFGxtnF'
+    script.async = true
+    document.body.appendChild(script)
+    return () => {
+      document.body.removeChild(script)
+      const jivo = document.getElementById('jivo-iframe-container')
+      if (jivo) jivo.remove()
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-100 fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-4 shadow-sm">
         <ApexLogo/>
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-navy-900 text-sm font-heading font-bold">
-            {profile?.username?.[0]?.toUpperCase()||'U'}
-          </div>
-          <button onClick={signOut} className="flex items-center gap-1 text-gray-400 hover:text-gray-600 text-sm font-body transition-colors">
-            <LogOut size={16}/><span className="hidden sm:inline">Logout</span>
-          </button>
+          <div className="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-navy-900 text-sm font-heading font-bold">{profile?.username?.[0]?.toUpperCase()||'U'}</div>
+          <button onClick={signOut} className="flex items-center gap-1 text-gray-400 hover:text-gray-600 text-sm font-body transition-colors"><LogOut size={16}/><span className="hidden sm:inline">Logout</span></button>
         </div>
       </header>
-
       <main className="pt-16 pb-20 px-4 max-w-2xl mx-auto">
         <div className="py-6">
           <Routes>
@@ -435,7 +451,6 @@ const Dashboard = () => {
           </Routes>
         </div>
       </main>
-
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-2 flex justify-around z-50 shadow-lg">
         {navItems.map(({to,label,icon:Icon})=>{
           const active = location.pathname===to||(to!=='/dashboard'&&location.pathname.startsWith(to))
