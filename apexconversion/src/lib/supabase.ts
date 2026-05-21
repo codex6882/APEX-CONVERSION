@@ -3,7 +3,14 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    storageKey: 'apex-auth',
+    storage: window.localStorage,
+    autoRefreshToken: true,
+  }
+})
 
 export type Profile = {
   id: string; username: string; full_name: string; email: string
@@ -20,7 +27,10 @@ export type Deposit = {
 
 export type Withdrawal = {
   id: string; user_id: string; amount: number
-  btc_address: string; swift_code: string
+  payment_method: string | null
+  wallet_type: string | null
+  wallet_address: string | null
+  btc_address: string | null
   status: 'pending' | 'approved' | 'rejected'; created_at: string
 }
 
