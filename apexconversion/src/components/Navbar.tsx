@@ -3,40 +3,51 @@ import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 export const ApexLogo = ({ white = false }: { white?: boolean }) => {
-  const navy = white ? 'white' : '#0A1628'
+  const navy = white ? '#ffffff' : '#0A1628'
   const blue = '#2563eb'
   return (
-    <Link to="/" className="flex flex-col items-center gap-1 no-underline">
-      {/* Icon */}
-      <svg width="72" height="72" viewBox="0 0 200 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Bold A shape - navy */}
-        <polygon points="100,8 192,195 8,195" fill="none" stroke={navy} strokeWidth="18" strokeLinejoin="round" strokeLinecap="round"/>
-        {/* Crossbar of A */}
-        <line x1="42" y1="148" x2="158" y2="148" stroke={navy} strokeWidth="14" strokeLinecap="round"/>
-        {/* Bar chart - 3 bars growing inside A */}
-        <rect x="78" y="125" width="13" height="23" rx="2" fill={blue}/>
-        <rect x="94" y="110" width="13" height="38" rx="2" fill={blue}/>
-        <rect x="110" y="118" width="13" height="30" rx="2" fill={blue}/>
-        {/* Swooping upward curved arrow */}
-        <path d="M 55 155 Q 90 80 155 30" fill="none" stroke={blue} strokeWidth="9" strokeLinecap="round"/>
-        {/* Arrowhead */}
-        <polygon points="155,30 132,38 148,58" fill={blue}/>
+    <Link to="/" className="flex items-center gap-1 no-underline">
+      {/* A with Saturn ring */}
+      <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Clean bold letter A */}
+        <text
+          x="50" y="82"
+          textAnchor="middle"
+          fontFamily="Sora, Arial, sans-serif"
+          fontWeight="900"
+          fontSize="80"
+          fill={navy}
+        >A</text>
+        {/* Saturn ring — ellipse going diagonally around the A */}
+        {/* Back half of ring (behind A) — drawn first */}
+        <ellipse cx="50" cy="52" rx="46" ry="14"
+          fill="none"
+          stroke={blue}
+          strokeWidth="4"
+          strokeDasharray="145 145"
+          strokeDashoffset="0"
+          transform="rotate(-20 50 52)"
+          opacity="0.5"
+        />
+        {/* Front half of ring (in front of A) — drawn on top */}
+        <ellipse cx="50" cy="52" rx="46" ry="14"
+          fill="none"
+          stroke={blue}
+          strokeWidth="4"
+          strokeDasharray="145 145"
+          strokeDashoffset="145"
+          transform="rotate(-20 50 52)"
+        />
       </svg>
-
-      {/* Text block */}
-      <div className="flex flex-col items-center leading-tight">
-        {/* APEX — AP navy, EX blue */}
-        <div className="flex items-center">
-          <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:'22px', letterSpacing:'3px', color: navy }}>AP</span>
-          <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:'22px', letterSpacing:'3px', color: blue }}>EX</span>
-        </div>
-        {/* CONVERSION */}
-        <div style={{ fontFamily:'Sora,sans-serif', fontWeight:700, fontSize:'11px', letterSpacing:'4px', color: blue, marginTop:'1px' }}>CONVERSION</div>
-        {/* — AFFILIATES — */}
-        <div style={{ fontFamily:'Sora,sans-serif', fontWeight:600, fontSize:'9px', letterSpacing:'3px', color: navy, marginTop:'2px' }}>— AFFILIATES —</div>
-        {/* Tagline */}
-        <div style={{ fontFamily:'DM Sans,sans-serif', fontWeight:400, fontSize:'7px', letterSpacing:'2px', color: white ? 'rgba(255,255,255,0.5)' : '#6b7280', marginTop:'3px' }}>CONNECT. PROMOTE. EARN.</div>
-      </div>
+      {/* PEX text completing APEX */}
+      <span style={{
+        fontFamily: 'Sora, sans-serif',
+        fontWeight: 900,
+        fontSize: '26px',
+        color: navy,
+        letterSpacing: '1px',
+        lineHeight: 1,
+      }}>PEX</span>
     </Link>
   )
 }
