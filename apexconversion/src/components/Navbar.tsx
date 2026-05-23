@@ -2,29 +2,47 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
-export const ApexLogo = ({ white = false }: { white?: boolean }) => (
-  <Link to="/" className="flex items-center gap-3">
-    <svg width="40" height="40" viewBox="0 0 200 200" fill="none">
-      <polygon points="100,10 185,185 15,185" fill="none" stroke={white ? 'white' : '#0A1628'} strokeWidth="14" strokeLinejoin="round"/>
-      <line x1="45" y1="145" x2="155" y2="145" stroke={white ? 'white' : '#0A1628'} strokeWidth="12"/>
-      <rect x="80" y="120" width="10" height="25" fill="#2563eb"/>
-      <rect x="95" y="105" width="10" height="40" fill="#2563eb"/>
-      <rect x="110" y="115" width="10" height="30" fill="#2563eb"/>
-      <polyline points="95,60 140,20 170,50" fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-      <polygon points="170,50 145,30 160,65" fill="#2563eb"/>
-    </svg>
-    <div>
-      <div className={`font-heading font-bold text-base leading-tight ${white ? 'text-white' : 'text-navy-900'}`}>
-        Apex<span className="text-blue-600">Conversion</span>
+export const ApexLogo = ({ white = false }: { white?: boolean }) => {
+  const navy = white ? 'white' : '#0A1628'
+  const blue = '#2563eb'
+  return (
+    <Link to="/" className="flex flex-col items-center gap-1 no-underline">
+      {/* Icon */}
+      <svg width="72" height="72" viewBox="0 0 200 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Bold A shape - navy */}
+        <polygon points="100,8 192,195 8,195" fill="none" stroke={navy} strokeWidth="18" strokeLinejoin="round" strokeLinecap="round"/>
+        {/* Crossbar of A */}
+        <line x1="42" y1="148" x2="158" y2="148" stroke={navy} strokeWidth="14" strokeLinecap="round"/>
+        {/* Bar chart - 3 bars growing inside A */}
+        <rect x="78" y="125" width="13" height="23" rx="2" fill={blue}/>
+        <rect x="94" y="110" width="13" height="38" rx="2" fill={blue}/>
+        <rect x="110" y="118" width="13" height="30" rx="2" fill={blue}/>
+        {/* Swooping upward curved arrow */}
+        <path d="M 55 155 Q 90 80 155 30" fill="none" stroke={blue} strokeWidth="9" strokeLinecap="round"/>
+        {/* Arrowhead */}
+        <polygon points="155,30 132,38 148,58" fill={blue}/>
+      </svg>
+
+      {/* Text block */}
+      <div className="flex flex-col items-center leading-tight">
+        {/* APEX — AP navy, EX blue */}
+        <div className="flex items-center">
+          <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:'22px', letterSpacing:'3px', color: navy }}>AP</span>
+          <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:'22px', letterSpacing:'3px', color: blue }}>EX</span>
+        </div>
+        {/* CONVERSION */}
+        <div style={{ fontFamily:'Sora,sans-serif', fontWeight:700, fontSize:'11px', letterSpacing:'4px', color: blue, marginTop:'1px' }}>CONVERSION</div>
+        {/* — AFFILIATES — */}
+        <div style={{ fontFamily:'Sora,sans-serif', fontWeight:600, fontSize:'9px', letterSpacing:'3px', color: navy, marginTop:'2px' }}>— AFFILIATES —</div>
+        {/* Tagline */}
+        <div style={{ fontFamily:'DM Sans,sans-serif', fontWeight:400, fontSize:'7px', letterSpacing:'2px', color: white ? 'rgba(255,255,255,0.5)' : '#6b7280', marginTop:'3px' }}>CONNECT. PROMOTE. EARN.</div>
       </div>
-      <div className={`font-body text-xs tracking-widest ${white ? 'text-white/60' : 'text-gray-500'}`}>AFFILIATES</div>
-    </div>
-  </Link>
-)
+    </Link>
+  )
+}
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
-
   return (
     <nav className="glass-nav fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-6">
       <ApexLogo white />
