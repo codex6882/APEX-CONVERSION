@@ -49,8 +49,8 @@ const DashboardHome = () => {
 
   return (
     <div>
-      {/* ── Dark hero zone ── */}
-      <div className="relative" style={{ background: '#06101f', margin: '-20px -16px 0', padding: '20px 20px 0' }}>
+      {/* ── Dark hero zone — full width ── */}
+      <div style={{ background: '#06101f', padding: '20px 16px 0' }}>
 
         {/* Top row: greeting + bell */}
         <div className="flex items-start justify-between mb-6 pt-2">
@@ -87,11 +87,11 @@ const DashboardHome = () => {
           </p>
         </div>
 
-        {/* Action buttons — bridge between dark and light */}
-        <div className="flex gap-3 pb-0 pt-6">
+        {/* Action buttons */}
+        <div className="flex gap-3 pt-6">
           <Link to="/dashboard/deposit"
             className="flex-1 flex items-center justify-center gap-2 font-body font-bold text-white py-3.5 transition-all hover:opacity-90"
-            style={{ background: '#2563eb', borderRadius: '14px 14px 0 0', fontSize: '13px' }}>
+            style={{ background: '#2563eb', borderRadius: '12px', fontSize: '13px' }}>
             <ArrowDownLeft size={15} /> Deposit
           </Link>
           <Link to="/dashboard/withdraw"
@@ -99,18 +99,20 @@ const DashboardHome = () => {
             style={{
               background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(255,255,255,0.10)',
-              borderBottom: 'none',
-              borderRadius: '14px 14px 0 0',
+              borderRadius: '12px',
               fontSize: '13px',
               color: 'rgba(255,255,255,0.65)',
             }}>
             <ArrowUpRight size={15} /> Withdraw
           </Link>
         </div>
+
+        {/* Dark bottom padding */}
+        <div style={{ height: '20px' }} />
       </div>
 
       {/* ── Light content zone ── */}
-      <div style={{ background: '#f4f6fb', margin: '0 -16px', padding: '20px 16px 0' }}>
+      <div style={{ background: '#f4f6fb', padding: '20px 16px 0' }}>
 
         {/* Stat cards */}
         <div className="grid grid-cols-2 gap-3 mb-4">
@@ -627,13 +629,9 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen" style={{ background: '#f4f6fb' }}>
 
-      {/* Header — transparent on home so dark hero bleeds under it, white on inner pages */}
+      {/* Header — always white with logo visible */}
       <header className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-5"
-        style={{
-          background: isHome ? '#06101f' : '#fff',
-          borderBottom: isHome ? '1px solid rgba(255,255,255,0.06)' : '1px solid #e8edf5',
-          boxShadow: isHome ? 'none' : '0 1px 4px rgba(0,0,0,0.04)',
-        }}>
+        style={{ background: '#fff', borderBottom: '1px solid #e8edf5', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
         <ApexLogo />
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-heading font-bold"
@@ -642,7 +640,7 @@ const Dashboard = () => {
           </div>
           <button onClick={signOut}
             className="flex items-center gap-1.5 font-body text-sm transition-colors"
-            style={{ color: isHome ? 'rgba(255,255,255,0.35)' : '#94a3b8', fontSize: '13px' }}>
+            style={{ color: '#94a3b8', fontSize: '13px' }}>
             <LogOut size={14} />
             <span className="hidden sm:inline">Logout</span>
           </button>
@@ -650,8 +648,8 @@ const Dashboard = () => {
       </header>
 
       {/* Main */}
-      <main className="pt-14 pb-20 px-4 max-w-2xl mx-auto">
-        <div className={isHome ? '' : 'py-5'}>
+      <main className="pt-14 pb-20">
+        <div className={isHome ? 'max-w-2xl mx-auto' : 'max-w-2xl mx-auto py-5 px-4'}>
           <Routes>
             <Route index element={<DashboardHome />} />
             <Route path="deposit"  element={<DepositPage />} />
