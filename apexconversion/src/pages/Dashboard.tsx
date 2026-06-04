@@ -55,7 +55,7 @@ const DashboardHome = () => {
         {/* Top row: greeting + bell */}
         <div className="flex items-start justify-between mb-6 pt-2">
           <div>
-            <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.28)', letterSpacing: '2px' }}>
+            <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.60)', letterSpacing: '2px' }}>
               {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
             </p>
             <h1 className="font-heading font-bold text-white" style={{ fontSize: '20px', letterSpacing: '-0.3px' }}>
@@ -72,17 +72,17 @@ const DashboardHome = () => {
         {/* Balance */}
         <div className="mb-2">
           <div className="flex items-center gap-2 mb-1">
-            <p className="font-body uppercase tracking-widest" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.28)', letterSpacing: '2px' }}>
+            <p className="font-body uppercase tracking-widest" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.60)', letterSpacing: '2px' }}>
               Account Balance
             </p>
-            <button onClick={() => setShowBalance(!showBalance)} style={{ color: 'rgba(255,255,255,0.28)' }}>
+            <button onClick={() => setShowBalance(!showBalance)} style={{ color: 'rgba(255,255,255,0.60)' }}>
               {showBalance ? <Eye size={13} /> : <EyeOff size={13} />}
             </button>
           </div>
           <p className="font-heading font-bold text-white" style={{ fontSize: '48px', letterSpacing: '-3px', lineHeight: 1 }}>
             {showBalance ? `$${Number(profile.balance).toFixed(2)}` : '••••••'}
           </p>
-          <p className="font-body mt-1" style={{ fontSize: '11px', color: 'rgba(255,255,255,0.20)' }}>
+          <p className="font-body mt-1" style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>
             Updated {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
           </p>
         </div>
@@ -97,11 +97,12 @@ const DashboardHome = () => {
           <Link to="/dashboard/withdraw"
             className="flex-1 flex items-center justify-center gap-2 font-body font-semibold py-3.5 transition-all hover:opacity-80"
             style={{
-              background: 'rgba(255,255,255,0.07)',
-              border: '1px solid rgba(255,255,255,0.10)',
+              background: 'rgba(255,255,255,0.10)',
+              border: '1px solid rgba(255,255,255,0.20)',
               borderRadius: '12px',
               fontSize: '13px',
-              color: 'rgba(255,255,255,0.65)',
+              color: 'rgba(255,255,255,0.90)',
+              fontWeight: '600',
             }}>
             <ArrowUpRight size={15} /> Withdraw
           </Link>
