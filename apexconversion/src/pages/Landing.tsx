@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, CheckCircle, Star, Shield, Zap, Globe,
-  UserPlus, BarChart2, Wallet, ChevronRight
+  ArrowRight, Shield, Zap, Globe, CheckCircle,
+  Star, UserPlus, BarChart2, Wallet, ChevronRight, Lock, TrendingUp
 } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -19,13 +19,6 @@ const testimonials = [
   { quote: "I've tried many platforms but none come close to Apex. The deposit system is seamless.", name: "Priya S.", role: "Online Entrepreneur" },
 ]
 
-const team = [
-  { name: "Franklin Hart", role: "CEO & Founder", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face" },
-  { name: "Olivia Bennett", role: "Head of Operations", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face" },
-  { name: "Wei Zhang", role: "Senior Affiliate Manager", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face" },
-  { name: "Jack Doe", role: "Growth Strategist", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face" },
-]
-
 const Landing = () => {
   useEffect(() => {
     const script = document.createElement('script')
@@ -40,111 +33,169 @@ const Landing = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ fontFamily: 'inherit' }}>
       <Navbar />
       <FloatingNotifications />
 
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop')" }}
-        />
-        {/* Overlay */}
+      {/* ══════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════ */}
+      <section
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+        style={{ background: '#06101f' }}
+      >
+        {/* Background image with strong overlay */}
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.90) 60%, rgba(20,48,90,0.85) 100%)' }}
-        />
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-5"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
-            backgroundSize: '72px 72px'
+            backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.18,
           }}
         />
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-24 pb-20">
+        {/* Fine grid */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* Top horizontal rule */}
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 w-full pt-32 pb-24">
+          {/* Eyebrow */}
+          <p
+            className="font-body font-semibold uppercase tracking-widest mb-8"
+            style={{ fontSize: '11px', color: '#3b82f6', letterSpacing: '3px' }}
+          >
+            Affiliate Marketing Platform
+          </p>
+
+          {/* Main headline */}
           <h1
-            className="font-heading font-bold text-white leading-none mb-6"
-            style={{ fontSize: 'clamp(56px, 10vw, 100px)', letterSpacing: '-3px', lineHeight: 0.93 }}
+            className="font-heading font-bold text-white mb-8"
+            style={{
+              fontSize: 'clamp(52px, 9vw, 108px)',
+              letterSpacing: '-4px',
+              lineHeight: 0.90,
+              maxWidth: '820px',
+            }}
           >
             Connect.<br />
             Promote.<br />
             <span style={{ color: '#3b82f6' }}>Earn.</span>
           </h1>
 
+          {/* Divider */}
+          <div className="w-12 h-px mb-8" style={{ background: 'rgba(255,255,255,0.20)' }} />
+
           <p
-            className="font-body text-white/55 mb-12 max-w-lg mx-auto leading-relaxed"
-            style={{ fontSize: 'clamp(15px, 2vw, 18px)' }}
+            className="font-body mb-12"
+            style={{
+              fontSize: 'clamp(15px, 1.8vw, 18px)',
+              color: 'rgba(255,255,255,0.45)',
+              maxWidth: '440px',
+              lineHeight: '1.75',
+            }}
           >
-            Apex Conversion Affiliates empowers you to grow, earn, and succeed through a seamless affiliate experience built for everyone.
+            Apex empowers you to grow, earn, and succeed through a seamless affiliate experience built for everyone.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-20">
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3 mb-24">
             <Link
               to="/register"
-              className="inline-flex items-center justify-center gap-2 font-body font-bold text-white rounded-xl transition-all hover:scale-105 hover:brightness-110"
+              className="inline-flex items-center gap-2 font-body font-bold text-white rounded-lg transition-all hover:opacity-90 hover:gap-3"
               style={{
                 background: '#2563eb',
-                padding: '15px 36px',
-                fontSize: '15px',
-                boxShadow: '0 8px 28px rgba(37,99,235,0.40)',
+                padding: '14px 32px',
+                fontSize: '14px',
                 letterSpacing: '0.2px',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
               }}
             >
-              Join for Free <ArrowRight size={17} />
+              Join for Free <ArrowRight size={16} />
             </Link>
             <a
               href="#howitworks"
-              className="inline-flex items-center justify-center gap-2 font-body font-semibold rounded-xl transition-all hover:bg-white/8"
+              className="inline-flex items-center gap-2 font-body font-semibold rounded-lg transition-all hover:bg-white/5"
               style={{
-                border: '1.5px solid rgba(255,255,255,0.18)',
-                padding: '15px 36px',
-                fontSize: '15px',
-                color: 'rgba(255,255,255,0.70)',
-                whiteSpace: 'nowrap'
+                border: '1px solid rgba(255,255,255,0.14)',
+                padding: '14px 32px',
+                fontSize: '14px',
+                color: 'rgba(255,255,255,0.55)',
+                whiteSpace: 'nowrap',
               }}
             >
               Learn More
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="flex justify-center flex-wrap">
-            {[['$12M+', 'Paid Out'], ['10K+', 'Active Affiliates'], ['4.9/5', 'Satisfaction']].map(([n, l], i) => (
+          {/* Stats — horizontal ruled */}
+          <div
+            className="flex flex-wrap"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+          >
+            {[
+              ['$12M+', 'Total Paid Out'],
+              ['10,000+', 'Active Affiliates'],
+              ['4.9 / 5', 'Satisfaction Score'],
+            ].map(([value, label], i) => (
               <div
-                key={l}
-                className="text-center px-8 py-2"
-                style={{ borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}
+                key={label}
+                className="py-6 pr-12"
+                style={{
+                  borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                  marginRight: i < 2 ? '48px' : '0',
+                }}
               >
-                <p className="font-heading font-bold text-white" style={{ fontSize: '32px', letterSpacing: '-1px' }}>{n}</p>
-                <p className="font-body text-white/30 text-xs mt-1 tracking-widest uppercase">{l}</p>
+                <p
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: 'clamp(28px, 4vw, 40px)', letterSpacing: '-1.5px', lineHeight: 1 }}
+                >
+                  {value}
+                </p>
+                <p
+                  className="font-body mt-1.5 uppercase tracking-widest"
+                  style={{ fontSize: '10px', color: 'rgba(255,255,255,0.25)' }}
+                >
+                  {label}
+                </p>
               </div>
             ))}
           </div>
         </div>
+
+        {/* Bottom border */}
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
       </section>
 
-      {/* ── TRUST BAR ── */}
-      <section style={{ background: '#f8faff', padding: '40px 0', borderBottom: '1px solid #e8ecf4' }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* ══════════════════════════════════════════
+          TRUST BAR
+      ══════════════════════════════════════════ */}
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #e8ecf4' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4">
             {[
-              { icon: <Shield size={20} style={{ color: '#2563eb' }} />, label: 'SSL Secured', sub: 'Bank-level protection' },
-              { icon: <Zap size={20} style={{ color: '#2563eb' }} />, label: 'Fast Payouts', sub: 'Withdraw anytime' },
-              { icon: <Globe size={20} style={{ color: '#2563eb' }} />, label: 'Global Access', sub: 'No restrictions' },
-              { icon: <CheckCircle size={20} style={{ color: '#2563eb' }} />, label: 'Verified Platform', sub: 'Trusted & transparent' },
-            ].map(({ icon, label, sub }) => (
-              <div key={label} className="flex flex-col items-center gap-2">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: 'rgba(37,99,235,0.07)', border: '1px solid rgba(37,99,235,0.10)' }}
-                >
-                  {icon}
-                </div>
+              { icon: <Lock size={18} />, label: 'SSL Secured', sub: 'Bank-level protection' },
+              { icon: <Zap size={18} />, label: 'Fast Payouts', sub: 'Withdraw anytime' },
+              { icon: <Globe size={18} />, label: 'Global Access', sub: 'No restrictions' },
+              { icon: <CheckCircle size={18} />, label: 'Verified Platform', sub: 'Trusted & transparent' },
+            ].map(({ icon, label, sub }, i) => (
+              <div
+                key={label}
+                className="flex items-center gap-4 py-7 px-6"
+                style={{
+                  borderRight: i < 3 ? '1px solid #e8ecf4' : 'none',
+                  color: '#2563eb',
+                }}
+              >
+                <div className="flex-shrink-0">{icon}</div>
                 <div>
                   <p className="font-heading font-bold text-sm" style={{ color: '#0a1628' }}>{label}</p>
                   <p className="font-body text-xs mt-0.5" style={{ color: '#9ca3af' }}>{sub}</p>
@@ -155,98 +206,83 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section id="howitworks" style={{ background: '#ffffff', padding: '96px 0' }}>
+      {/* ══════════════════════════════════════════
+          HOW IT WORKS
+      ══════════════════════════════════════════ */}
+      <section id="howitworks" style={{ background: '#ffffff', padding: '120px 0' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <span
-              className="inline-block font-body font-bold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-4"
-              style={{ color: '#2563eb', background: 'rgba(37,99,235,0.07)' }}
-            >
-              Simple Process
-            </span>
-            <h2
-              className="font-heading font-bold"
-              style={{ fontSize: 'clamp(28px, 5vw, 50px)', letterSpacing: '-1.5px', lineHeight: 1.05, color: '#0a1628' }}
-            >
-              How It Works
-            </h2>
-            <p className="font-body mt-3 max-w-sm mx-auto" style={{ fontSize: '16px', color: '#9ca3af' }}>
-              Three simple steps to start earning with Apex
+
+          {/* Section header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20"
+            style={{ borderBottom: '1px solid #e8ecf4', paddingBottom: '40px' }}
+          >
+            <div>
+              <p className="font-body font-semibold uppercase tracking-widest mb-3"
+                style={{ fontSize: '11px', color: '#2563eb', letterSpacing: '3px' }}>
+                Simple Process
+              </p>
+              <h2
+                className="font-heading font-bold"
+                style={{ fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '-2px', lineHeight: 1, color: '#06101f' }}
+              >
+                How It Works
+              </h2>
+            </div>
+            <p className="font-body mt-4 md:mt-0" style={{ fontSize: '15px', color: '#9ca3af', maxWidth: '260px' }}>
+              Three steps to start earning with Apex Conversion Affiliates.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
             {[
               {
-                step: '01',
-                icon: <UserPlus size={26} color="#2563eb" />,
+                num: '01',
+                icon: <UserPlus size={22} color="#2563eb" />,
                 title: 'Create Account',
                 desc: 'Sign up for free and receive your $8 welcome bonus instantly upon registration.',
-                featured: false
               },
               {
-                step: '02',
-                icon: <BarChart2 size={26} color="#fff" />,
+                num: '02',
+                icon: <BarChart2 size={22} color="#2563eb" />,
                 title: 'Start Promoting',
                 desc: 'Access your affiliate dashboard, make deposits and start earning commissions.',
-                featured: true
               },
               {
-                step: '03',
-                icon: <Wallet size={26} color="#2563eb" />,
+                num: '03',
+                icon: <Wallet size={22} color="#2563eb" />,
                 title: 'Withdraw Earnings',
-                desc: 'Request withdrawals anytime to your wallet. Fast and transparent payouts.',
-                featured: false
+                desc: 'Request withdrawals anytime to your crypto wallet. Fast and transparent payouts.',
               },
-            ].map(({ step, icon, title, desc, featured }) => (
+            ].map(({ num, icon, title, desc }, i) => (
               <div
-                key={step}
-                className="relative overflow-hidden rounded-2xl p-7 transition-all duration-300"
+                key={num}
+                className="py-10 px-8"
                 style={{
-                  background: featured ? 'linear-gradient(145deg, #0a1628, #1e3a5f)' : '#fff',
-                  border: featured ? 'none' : '1.5px solid #e8ecf4',
-                  boxShadow: featured
-                    ? '0 20px 56px rgba(10,22,40,0.22)'
-                    : '0 2px 12px rgba(0,0,0,0.04)',
-                  transform: featured ? 'scale(1.03)' : 'scale(1)',
+                  borderLeft: i > 0 ? '1px solid #e8ecf4' : 'none',
                 }}
               >
-                <div
-                  className="absolute top-5 right-6 font-heading font-bold select-none"
-                  style={{
-                    fontSize: '68px',
-                    letterSpacing: '-3px',
-                    lineHeight: 1,
-                    color: featured ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)'
-                  }}
-                >
-                  {step}
-                </div>
-
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 relative z-10"
-                  style={{ background: featured ? 'rgba(59,130,246,0.25)' : 'rgba(37,99,235,0.07)', border: featured ? '1px solid rgba(59,130,246,0.3)' : '1px solid rgba(37,99,235,0.10)' }}
-                >
-                  {icon}
-                </div>
-
-                <div
-                  className="font-body font-bold text-xs tracking-widest uppercase mb-2 relative z-10"
-                  style={{ color: featured ? '#60a5fa' : '#2563eb' }}
-                >
-                  Step {step}
+                <div className="flex items-center justify-between mb-8">
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center"
+                    style={{ background: 'rgba(37,99,235,0.07)' }}
+                  >
+                    {icon}
+                  </div>
+                  <span
+                    className="font-heading font-bold"
+                    style={{ fontSize: '56px', letterSpacing: '-3px', color: '#f0f4ff', lineHeight: 1 }}
+                  >
+                    {num}
+                  </span>
                 </div>
                 <h3
-                  className="font-heading font-bold mb-2 relative z-10"
-                  style={{ fontSize: '19px', color: featured ? '#fff' : '#0a1628' }}
+                  className="font-heading font-bold mb-3"
+                  style={{ fontSize: '20px', color: '#06101f', letterSpacing: '-0.5px' }}
                 >
                   {title}
                 </h3>
-                <p
-                  className="font-body leading-relaxed relative z-10"
-                  style={{ fontSize: '14px', color: featured ? 'rgba(255,255,255,0.50)' : '#6b7280' }}
-                >
+                <p className="font-body leading-relaxed" style={{ fontSize: '14px', color: '#6b7280' }}>
                   {desc}
                 </p>
               </div>
@@ -255,63 +291,72 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ── ABOUT ── */}
-      <section id="about" style={{ background: '#f8faff', padding: '96px 0' }}>
+      {/* ══════════════════════════════════════════
+          ABOUT — dark section
+      ══════════════════════════════════════════ */}
+      <section id="about" style={{ background: '#06101f', padding: '120px 0' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
             <div>
-              <span
-                className="inline-block font-body font-bold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-5"
-                style={{ color: '#2563eb', background: 'rgba(37,99,235,0.07)' }}
-              >
+              <p className="font-body font-semibold uppercase tracking-widest mb-6"
+                style={{ fontSize: '11px', color: '#3b82f6', letterSpacing: '3px' }}>
                 About Us
-              </span>
+              </p>
               <h2
-                className="font-heading font-bold mb-7"
-                style={{ fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-1.5px', lineHeight: 1.08, color: '#0a1628' }}
+                className="font-heading font-bold text-white mb-8"
+                style={{ fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', lineHeight: 1.05 }}
               >
                 Why Apex Conversion Affiliates?
               </h2>
-              <p className="font-body leading-relaxed mb-4" style={{ fontSize: '15px', lineHeight: '1.8', color: '#6b7280' }}>
+              <div className="w-12 h-px mb-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+              <p className="font-body leading-relaxed mb-5"
+                style={{ fontSize: '15px', lineHeight: '1.8', color: 'rgba(255,255,255,0.45)' }}>
                 Apex Conversion Affiliates is designed to empower affiliates with a seamless earning experience. Our platform combines cutting-edge security with intuitive tools, so you can connect, promote, and grow your income effortlessly.
               </p>
-              <p className="font-body leading-relaxed mb-9" style={{ fontSize: '15px', lineHeight: '1.8', color: '#6b7280' }}>
+              <p className="font-body leading-relaxed mb-12"
+                style={{ fontSize: '15px', lineHeight: '1.8', color: 'rgba(255,255,255,0.45)' }}>
                 From flexible deposit plans to multi-level affiliate rewards, Apex gives you the flexibility to manage your portfolio your way — anytime, anywhere.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {['Designed for everyone', 'Earn as you go', 'All the tools you need', 'Flexible plans', 'Multiple earning levels', 'Simple to manage', 'Connect. Promote. Pay.', 'Quick to set up'].map(f => (
-                  <div key={f} className="flex items-center gap-2.5">
-                    <div
-                      className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ background: '#2563eb' }}
-                    >
-                      <CheckCircle size={10} color="#fff" />
-                    </div>
-                    <span className="font-body text-gray-700 text-sm">{f}</span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  'Designed for everyone',
+                  'Earn as you go',
+                  'All the tools you need',
+                  'Flexible plans',
+                  'Multiple earning levels',
+                  'Simple to manage',
+                  'Connect. Promote. Pay.',
+                  'Quick to set up',
+                ].map(f => (
+                  <div key={f} className="flex items-center gap-3">
+                    <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#3b82f6' }} />
+                    <span className="font-body text-sm" style={{ color: 'rgba(255,255,255,0.50)' }}>{f}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               <img
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop"
                 alt="Team"
                 className="w-full object-cover"
-                style={{ borderRadius: '20px', height: '230px', boxShadow: '0 16px 48px rgba(0,0,0,0.10)' }}
+                style={{ borderRadius: '12px', height: '240px' }}
               />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop"
-                  alt="Pro"
+                  alt="Professional"
                   className="w-full object-cover"
-                  style={{ borderRadius: '16px', height: '150px', boxShadow: '0 10px 28px rgba(0,0,0,0.09)' }}
+                  style={{ borderRadius: '12px', height: '155px' }}
                 />
                 <img
                   src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=300&h=200&fit=crop"
                   alt="Business"
                   className="w-full object-cover"
-                  style={{ borderRadius: '16px', height: '150px', boxShadow: '0 10px 28px rgba(0,0,0,0.09)' }}
+                  style={{ borderRadius: '12px', height: '155px' }}
                 />
               </div>
             </div>
@@ -319,63 +364,86 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ── TEAM ── */}
-      <section style={{ background: '#fff', padding: '96px 0' }}>
+      {/* ══════════════════════════════════════════
+          PLATFORM FEATURES — light section
+      ══════════════════════════════════════════ */}
+      <section style={{ background: '#f8faff', padding: '120px 0', borderTop: '1px solid #e8ecf4', borderBottom: '1px solid #e8ecf4' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <span
-              className="inline-block font-body font-bold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-4"
-              style={{ color: '#2563eb', background: 'rgba(37,99,235,0.07)' }}
-            >
-              Our People
-            </span>
+          <div className="mb-16" style={{ borderBottom: '1px solid #e8ecf4', paddingBottom: '40px' }}>
+            <p className="font-body font-semibold uppercase tracking-widest mb-3"
+              style={{ fontSize: '11px', color: '#2563eb', letterSpacing: '3px' }}>
+              Platform
+            </p>
             <h2
               className="font-heading font-bold"
-              style={{ fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-1.5px', color: '#0a1628' }}
+              style={{ fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#06101f', lineHeight: 1 }}
             >
-              Our Affiliate Experts
+              Built for Performance
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {team.map(({ name, role, img }) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+            {[
+              {
+                icon: <Shield size={20} color="#2563eb" />,
+                title: 'Enterprise Security',
+                desc: 'SSL encryption and bank-level data protection keeps your account and earnings safe at all times.',
+              },
+              {
+                icon: <TrendingUp size={20} color="#2563eb" />,
+                title: 'Real-Time Earnings',
+                desc: 'Track your commissions and referral income live from your dashboard — full transparency, always.',
+              },
+              {
+                icon: <Wallet size={20} color="#2563eb" />,
+                title: 'Instant Withdrawals',
+                desc: 'Request payouts directly to your crypto wallet with no delays. BTC and USDT supported.',
+              },
+            ].map(({ icon, title, desc }, i) => (
               <div
-                key={name}
-                className="group text-center rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
-                style={{ border: '1.5px solid #e8ecf4', boxShadow: '0 2px 12px rgba(0,0,0,0.04)', background: '#fff' }}
+                key={title}
+                className="py-10 px-8"
+                style={{ borderLeft: i > 0 ? '1px solid #e8ecf4' : 'none' }}
               >
-                <div className="overflow-hidden" style={{ height: '170px' }}>
-                  <img
-                    src={img}
-                    alt={name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-6"
+                  style={{ background: 'rgba(37,99,235,0.08)', border: '1px solid rgba(37,99,235,0.12)' }}
+                >
+                  {icon}
                 </div>
-                <div className="p-4">
-                  <h4 className="font-heading font-bold text-sm" style={{ color: '#0a1628' }}>{name}</h4>
-                  <p className="font-body text-xs mt-1" style={{ color: '#9ca3af' }}>{role}</p>
-                </div>
+                <h3
+                  className="font-heading font-bold mb-3"
+                  style={{ fontSize: '17px', color: '#06101f', letterSpacing: '-0.3px' }}
+                >
+                  {title}
+                </h3>
+                <p className="font-body leading-relaxed" style={{ fontSize: '14px', color: '#6b7280' }}>
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section style={{ background: '#0a1628', padding: '80px 0', overflow: 'hidden' }}>
-        <div className="max-w-6xl mx-auto px-6 mb-12 text-center">
-          <span
-            className="inline-block font-body font-bold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-4"
-            style={{ color: '#60a5fa', background: 'rgba(96,165,250,0.10)' }}
-          >
+      {/* ══════════════════════════════════════════
+          TESTIMONIALS — dark section
+      ══════════════════════════════════════════ */}
+      <section style={{ background: '#06101f', padding: '100px 0', overflow: 'hidden' }}>
+        <div className="max-w-6xl mx-auto px-6 mb-14">
+          <p className="font-body font-semibold uppercase tracking-widest mb-4"
+            style={{ fontSize: '11px', color: '#3b82f6', letterSpacing: '3px' }}>
             What They Say
-          </span>
+          </p>
           <h2
             className="font-heading font-bold text-white"
-            style={{ fontSize: 'clamp(26px, 4vw, 44px)', letterSpacing: '-1.5px' }}
+            style={{ fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', lineHeight: 1 }}
           >
             Client Testimonials
           </h2>
         </div>
+
+        {/* Scrolling strip */}
         <div className="overflow-hidden">
           <div className="flex gap-4 animate-scroll w-max">
             {[...testimonials, ...testimonials].map(({ quote, name, role }, i) => (
@@ -383,34 +451,34 @@ const Landing = () => {
                 key={i}
                 className="flex-shrink-0"
                 style={{
-                  width: '290px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  borderRadius: '20px',
-                  padding: '24px'
+                  width: '300px',
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  borderRadius: '12px',
+                  padding: '28px',
                 }}
               >
-                <div className="flex gap-1 mb-3">
+                <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={12} className="text-yellow-400 fill-yellow-400" />
+                    <Star key={j} size={12} className="fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p
-                  className="font-body leading-relaxed mb-5"
-                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.60)' }}
+                  className="font-body leading-relaxed mb-6"
+                  style={{ fontSize: '13px', color: 'rgba(255,255,255,0.50)' }}
                 >
                   "{quote}"
                 </p>
                 <div className="flex items-center gap-3">
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center font-heading font-bold text-white text-sm flex-shrink-0"
-                    style={{ background: '#2563eb' }}
+                    style={{ background: '#2563eb', fontSize: '13px' }}
                   >
                     {name[0]}
                   </div>
                   <div>
-                    <p className="font-heading font-semibold text-white text-sm">{name}</p>
-                    <p className="font-body text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.30)' }}>{role}</p>
+                    <p className="font-heading font-semibold text-white" style={{ fontSize: '13px' }}>{name}</p>
+                    <p className="font-body mt-0.5" style={{ fontSize: '11px', color: 'rgba(255,255,255,0.28)' }}>{role}</p>
                   </div>
                 </div>
               </div>
@@ -419,73 +487,84 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ padding: '96px 0', background: '#fff' }}>
-        <div className="max-w-4xl mx-auto px-6">
-          <div
-            className="relative overflow-hidden rounded-2xl p-12 text-center"
-            style={{ background: 'linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #2563eb 100%)' }}
-          >
-            <div className="relative z-10">
+      {/* ══════════════════════════════════════════
+          CTA — full-width dark band
+      ══════════════════════════════════════════ */}
+      <section style={{ background: '#0f1e38', padding: '100px 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="font-body font-semibold uppercase tracking-widest mb-5"
+                style={{ fontSize: '11px', color: '#3b82f6', letterSpacing: '3px' }}>
+                Get Started
+              </p>
               <h2
-                className="font-heading font-bold text-white mb-4"
-                style={{ fontSize: 'clamp(24px, 5vw, 46px)', letterSpacing: '-1.5px' }}
+                className="font-heading font-bold text-white"
+                style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-2px', lineHeight: 1.05 }}
               >
                 Ready to Start Earning?
               </h2>
+            </div>
+            <div className="flex flex-col gap-4">
               <p
-                className="font-body text-white/55 mb-8"
-                style={{ fontSize: '16px' }}
+                className="font-body"
+                style={{ fontSize: '16px', color: 'rgba(255,255,255,0.40)', lineHeight: '1.7' }}
               >
-                Join thousands of affiliates already earning with Apex Conversion Affiliates
+                Join thousands of affiliates already earning with Apex Conversion Affiliates. Sign up free in under a minute.
               </p>
-              <Link
-                to="/register"
-                className="inline-flex items-center gap-2 font-body font-bold rounded-xl transition-all hover:scale-105"
-                style={{
-                  background: '#fff',
-                  color: '#1e40af',
-                  padding: '15px 40px',
-                  fontSize: '15px',
-                  boxShadow: '0 8px 28px rgba(0,0,0,0.18)',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                Get Started Free <ChevronRight size={17} />
-              </Link>
+              <div className="flex flex-wrap gap-3 mt-2">
+                <Link
+                  to="/register"
+                  className="inline-flex items-center gap-2 font-body font-bold text-white rounded-lg transition-all hover:opacity-90"
+                  style={{
+                    background: '#2563eb',
+                    padding: '14px 32px',
+                    fontSize: '14px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Get Started Free <ChevronRight size={16} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── SUBSCRIBE ── */}
-      <section style={{ background: '#f8faff', padding: '64px 0', borderTop: '1px solid #e8ecf4' }}>
-        <div className="max-w-lg mx-auto px-6 text-center">
-          <h3
-            className="font-heading font-bold mb-2"
-            style={{ fontSize: '22px', letterSpacing: '-0.5px', color: '#0a1628' }}
-          >
-            Stay Informed
-          </h3>
-          <p className="font-body mb-7" style={{ color: '#9ca3af', fontSize: '14px' }}>
-            Never miss an Apex update!
-          </p>
-          <div
-            className="flex gap-2 p-1.5 rounded-xl"
-            style={{ background: '#fff', border: '1.5px solid #e8ecf4' }}
-          >
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="flex-1 font-body text-sm focus:outline-none bg-transparent px-3 text-navy-900 placeholder-gray-400"
-              style={{ color: '#0a1628' }}
-            />
-            <button
-              className="font-body font-bold text-white text-sm rounded-lg px-5 py-2.5 transition-all hover:opacity-90"
-              style={{ background: '#2563eb', whiteSpace: 'nowrap' }}
+      {/* ══════════════════════════════════════════
+          SUBSCRIBE
+      ══════════════════════════════════════════ */}
+      <section style={{ background: '#f8faff', padding: '72px 0', borderTop: '1px solid #e8ecf4' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div>
+              <h3
+                className="font-heading font-bold"
+                style={{ fontSize: '22px', letterSpacing: '-0.5px', color: '#06101f' }}
+              >
+                Stay Informed
+              </h3>
+              <p className="font-body mt-1" style={{ color: '#9ca3af', fontSize: '14px' }}>
+                Never miss an Apex update.
+              </p>
+            </div>
+            <div
+              className="flex gap-2 p-1.5 rounded-lg"
+              style={{ background: '#fff', border: '1px solid #e8ecf4', maxWidth: '420px', width: '100%' }}
             >
-              Subscribe
-            </button>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 font-body text-sm focus:outline-none bg-transparent px-3"
+                style={{ color: '#06101f' }}
+              />
+              <button
+                className="font-body font-bold text-white text-sm rounded-md px-5 py-2.5 transition-all hover:opacity-90"
+                style={{ background: '#2563eb', whiteSpace: 'nowrap' }}
+              >
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
       </section>
